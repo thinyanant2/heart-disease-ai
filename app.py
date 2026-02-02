@@ -72,4 +72,5 @@ if st.sidebar.button("စစ်ဆေးမည် (Check Risk)"):
 
 
 else:
+
     st.info("ဘေးဘက်ရှိ Sidebar တွင် အချက်အလက်များဖြည့်ပြီး 'Check Risk' ကို နှိပ်ပါ။")
