@@ -1,15 +1,13 @@
 import streamlit as st
 import joblib
-import plotly.graph_objects as go # Visualization အတွက်
+import plotly.graph_objects as go 
 
-# Page configuration (Website ခေါင်းစဉ်နဲ့ Icon သတ်မှတ်တာ)
 st.set_page_config(page_title="HeartCare AI", page_icon="❤️")
 
 # Load models
 model = joblib.load('model.joblib')
 scaler = joblib.load('scaler.joblib')
 
-# --- SIDEBAR (Input အကွက်များကို ဘေးဘက်သို့ ရွှေ့ခြင်း) ---
 st.sidebar.header("📋 လူနာအချက်အလက်များ")
 st.sidebar.write("ကျေးဇူးပြု၍ အောက်ပါတို့ကို ဖြည့်စွက်ပါ")
 
@@ -17,9 +15,8 @@ age = st.sidebar.number_input("အသက် (Age)", 1, 100, 45)
 chol = st.sidebar.number_input("ကိုလက်စထရော (Cholesterol)", 100, 500, 220)
 hr = st.sidebar.number_input("အမြင့်ဆုံးနှလုံးခုန်နှုန်း (Max HR)", 50, 220, 150)
 
-# --- MAIN PAGE (ပင်မမျက်နှာပြင်) ---
 st.title("❤️ Heart Disease Prediction AI")
-st.write("---") # မျဉ်းတားတားခြင်း
+st.write("---") 
 
 st.subheader("ခန့်မှန်းချက်ရလဒ် (Prediction Result)")
 
@@ -32,7 +29,7 @@ if st.sidebar.button("စစ်ဆေးမည် (Check Risk)"):
     high_risk_percent = prob[0][1] * 100
 
     # UI Display
-    col1, col2 = st.columns(2) # အကွက် ၂ ကွက် ခွဲလိုက်တာ
+    col1, col2 = st.columns(2) 
 
     with col1:
         if prediction[0] == 1:
@@ -44,7 +41,6 @@ if st.sidebar.button("စစ်ဆေးမည် (Check Risk)"):
 
     with col2:
         st.write(f"**ဖြစ်နိုင်ခြေ ရာခိုင်နှုန်း:** {high_risk_percent:.1f}%")
-        # Progress bar လေးနဲ့ ပြတာ ပိုလှတယ်
         st.progress(int(high_risk_percent))
 
     st.write("---")
@@ -53,7 +49,6 @@ if st.sidebar.button("စစ်ဆေးမည် (Check Risk)"):
 
 
     # ------------------------------ plotly chart
-    # Gauge Chart ဆွဲမယ်
     fig = go.Figure(go.Indicator(
         mode = "gauge+number",
         value = high_risk_percent,
@@ -74,3 +69,4 @@ if st.sidebar.button("စစ်ဆေးမည် (Check Risk)"):
 else:
 
     st.info("ဘေးဘက်ရှိ Sidebar တွင် အချက်အလက်များဖြည့်ပြီး 'Check Risk' ကို နှိပ်ပါ။")
+
